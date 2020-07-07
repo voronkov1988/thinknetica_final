@@ -1,0 +1,40 @@
+.result-div{
+    height: auto;
+}
+.num-date{
+    display: flex;
+    padding: 5px;
+    margin-left: 10em;
+}
+.date{
+    margin-left: 30px;
+}
+.meta{
+    display: flex;
+    justify-content: space-around;
+}
+.res{
+    width: 38%;
+    margin-top: 10px;
+    border: 1px solid black;
+    height: auto;
+}
+.result-link{
+    position: absolute;
+    margin-top: 4em;
+    padding: 10px 10px;
+    color: lightslategray;
+}
+.help{
+    position: absolute;
+    padding: 10px 10px;
+    color: darkslategrey;
+}
+.text{
+    width: 30%;
+}
+.text, .submit{
+    line-height: 3em;
+    font-size: 1.5em;
+    padding: 10px;
+}

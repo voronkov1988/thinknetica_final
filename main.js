@@ -1,7 +1,8 @@
 'use strict';
 let status = document.querySelector('.status');
+let resultDiv = document.querySelector('.result-div');
 function getIssues() {
-    let resultDiv = document.querySelector('.result-div');
+
     let downloading = true;
     return function(url){
         fetch(url)
@@ -64,6 +65,7 @@ function getUrl() {
     submit.addEventListener('click', (e)=>{
         e.preventDefault();
         let textInput = document.querySelector('input.text').value;
+        resultDiv.innerHTML = '';
         dataValidation(textInput);
         resultLink.textContent = `https://api.github.com/repos/${textInput}/issues`;
         status.innerHTML = 'загружается...';

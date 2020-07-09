@@ -1,17 +1,37 @@
 .result-div{
     height: auto;
+    width: 100%;
+    margin-left: 10%;
+}
+.status{
+    font-size: 2em;
+    color: purple;
+    font-weight: bold;
+    text-align: center;
+}
+form.search{
+    text-align: center;
+}
+.title{
+    font-weight: bold;
+    color: darkblue;
+    font-size: 1.2em;
+}
+.description{
+
 }
 .num-date{
     display: flex;
+    justify-content: space-around;
     padding: 5px;
     margin-left: 10em;
 }
 .date{
-    margin-left: 30px;
+    margin-left: 20px;
 }
 .meta{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 .res{
     width: 38%;

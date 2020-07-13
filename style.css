@@ -1,151 +1,88 @@
-
+.inp{
+    border: none;
+    border-bottom: 2px solid black;
+    text-align: center;
+    font-size: 1.4em;
+    width: 15%;
+}
+.submit{
+    width: 10em;
+    height: 4em;
+    margin-left: 50px;
+}
+.main{
+    width: 60%;
+}
+.input-div{
+    font-size: 1.4em;
+}
+.status-div{
+    font-size: 1.2em;
+    color: red;
+    padding: 20px;
+    margin-left: 10em;
+}
+.result-div{
+    width: 100%;
+    height: auto;
+}
+.issues{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: auto;
+    border: 1px solid black;
+}
+.profile img{
+    max-width: 150px;
+}
+.profile p{
+    background-color: black;
+    width: 150px;
+    height: 50px;
+    text-align: center;
+}
+.profile a{
+    color: whitesmoke;
+    font-size: 2em;
+    text-decoration: none;
+}
+.info-title{
+    display: flex;
+    justify-content: space-between;
+}
 .info{
     flex-grow: 2;
-    margin-left: 2em;
-}
-.meta{
-    display: flex;
-    justify-content: space-between;
 }
 .title{
-    font-size: 1.8em;
-    font-weight: bold;
+    font-size: 2em;
+    color: darkred;
+    text-align: center;
     margin-top: 1em;
-    color: brown;
-}
-.num-date{
-    display: flex;
-    justify-content: space-between;
-}
-.date{
-    font-size: 1.3em;
-    margin-top: 1em;
-    padding: auto;
-    color: cornflowerblue;
-}
-.num{
-    font-size: 3em;
-    font-weight: bold;
 }
 .description{
     font-size: 1.4em;
-    margin-top: 1em;
-}
-.result-div{
-    height: auto;
-    width: 100%;
-    margin-left: 10%;
-}
-.user a{
-    display: block;
-    width: 100%;
-    text-decoration: none;
-    height: auto;
-    font-size: 1.6em;
-    background-color: black;
-    color: lightgoldenrodyellow;
-    text-align: center;
-    font-weight: bolder;
-}
-.user img{
-    max-width: 110px;
-}
-.status{
-    font-size: 2em;
-    color: purple;
-    font-weight: bold;
-    text-align: center;
-}
-form.search{
-    text-align: center;
-}
-
-.block{
-    display: flex;
-    justify-content: space-between;
-}
-
-.res{
-    width: 80%;
-    margin-top: 10px;
-    border: 1px solid black;
-    height: auto;
-}
-.result-link{
-    position: absolute;
-    margin-top: 4em;
-    padding: 10px 10px;
-    color: lightslategray;
-}
-.help{
-    position: absolute;
-    padding: 10px 10px;
-    color: darkslategrey;
-}
-.text{
-    width: 30%;
-}
-.text, .submit{
-    line-height: 3em;
-    font-size: 1.5em;
     padding: 10px;
-}
-.modal-page{
-    display: none;
-    position: absolute;
-    width: 90%;
-    height: auto;
-    margin-left: 5%;
-    z-index: 120;
-    /*padding: 1em 1em;*/
-    background-color: lightgoldenrodyellow;
-    /*border: 1px solid black;*/
-    border-radius: 20px;
-}
-.user-info{
-    display: flex;
-    justify-content: space-between;
-}
-.title-user{
-    padding: 1em;
-}
-.title-user span{
-    font-size: 3em;
-    font-weight: bolder;
-    color: #710909;
-    text-align: center;
-}
-.title-user p{
-    font-size: 2em;
     color: darkblue;
 }
-.user-meta-info{
-    display: flex;
-    justify-content: space-around;
-    margin-top: 3em;
-    padding-bottom: 2em;
+.data-created{
+    font-size: 1.8em;
+    color: blueviolet;
+    margin-top: 10px;
 }
-.modal-page button{
-    text-align: center;
-    margin-left: 30%;
-    width: 500px;
-    font-size: 2em;
-    border-radius: 20px;
+.number{
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-top: 1em;
+}
+.one-user, .one-repos{
+    display: inline-block;
+    width: auto;
+    margin-left: 20px;
+    height: 25px;
     background-color: black;
     color: white;
-    font-weight: bold;
-    margin-bottom: 1em;
-}
-.repos{
-    position: relative;
-    text-align: center;
-    margin-top: 30px;
-    height: auto;
-}
-.helpers{
-    margin-left: 1em;
-    font-size: 1.3em;
-    background-color: silver;
-    padding: 10px;
+    padding: 2px;
+    margin-top: 5px;
     cursor: pointer;
 }

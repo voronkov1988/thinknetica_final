@@ -2,6 +2,7 @@
 const inputUser = document.querySelector('input#user'),
     inputRepos = document.querySelector('input#repos'),
     reposDiv = document.querySelector('.repos'),
+    status = document.querySelector('.status-div'),
     usersDiv = document.querySelector('.users');
 
 async function getUsers(value){
@@ -17,6 +18,10 @@ async function getUsers(value){
         .then(result =>{
             renderUsers(result.items)
         })
+        .catch(function(error) {
+            status.innerHTML = `Ошибка ${error}`;
+            console.log('Request failed', error)
+        });
 }
 
 function renderUsers(users=null){

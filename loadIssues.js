@@ -1,5 +1,6 @@
 const statusDiv = document.querySelector('.status-div'),
     resultDiv = document.querySelector('.result-div'),
+    modalPage = document.querySelector('.modal-page'),
     form = document.querySelector('form.issues-form');
 
 function getIssues(user, repository){
@@ -20,36 +21,85 @@ function getIssues(user, repository){
         .then(response =>{
             renderIssues(response)
         })
+        .catch(function(error) {
+            statusDiv.innerHTML = `Ошибка ${error}`;
+            console.log('Request failed', error)
+        });
 }
 
 function renderIssues(issues){
     issues.forEach(item =>{
-        templateIssues(item.number, item.created_at, item.title, item.body, item.user.avatar_url, item.user.url)
-    })
-}
-
-function templateIssues(number, dateCreated, title, description, image, link){
-    link = link.replace('api.', '').replace('/users', '');
-    let element = document.createElement('div');
-    element.innerHTML = `
+        let element = document.createElement('div');
+        element.innerHTML = `
         <div class="result-div">
-            <div class="issues">
+            <div data-closed="${item.closed_at}" class="issues">
                 <div class="profile">
-                    <img src="${image}" alt="${title}">
-                    <p><a href="${link}">Профиль</a></p>
+                    <img data-number="${item.number}"
+                         data-created="${item.created_at}"
+                         data-title="${item.title}"
+                         data-description="${item.body}"
+                         data-image="${item.user.avatar_url}"
+                         data-link="${item.user.html_url}"
+                         data-closed="${item.closed_at}"
+                         data-updated="${item.updated_at}"
+                     src="${item.user.avatar_url}" alt="image">
+                    <p><a href="${item.user.html_url}">Профиль</a></p>
                 </div>
                 <div class="info">
                     <div class="info-title">
-                        <div class="title">${title}</div>
-                        <div class="number">номер issue: ${number}</div>
+                        <div class="title">${item.title}</div>
+                        <div class="number">номер issue: ${item.number}</div>
                     </div>
-                    <div class="description">${description.slice(0, 100)}</div>
-                    <div class="data-created">${dateCreated}</div>
+                    <div class="description">${item.body.slice(0, 100)}</div>
+                    <div class="data-created">${item.created_at}</div>
                 </div>
             </div>
         </div>
     `;
-    resultDiv.append(element);
+        resultDiv.append(element)
+    });
+    takeModal()
+}
+
+function takeModal(){
+    let imgDiv = document.querySelectorAll('.profile img');
+    imgDiv.forEach(item=>{
+        item.addEventListener('click', (e)=>{
+            renderModal(e.target)
+        })
+    })
+}
+
+function renderModal(data){
+    console.log(data);
+    modalPage.innerHTML = '';
+    let element = document.createElement('div');
+    element.classList = 'wrapper';
+    element.innerHTML = `
+        <div class="modal-info">
+            <div class="modal-contacts">
+                <img src="${data.dataset.image}" alt="">
+                <p><a href="${data.dataset.link}">Issue link</a></p>
+            </div>
+            <div class="modal-title">
+                <div class="modal-h2">${data.dataset.title}</div>
+                <div class="modal-description">${data.dataset.description}</div>
+            </div>
+        </div>
+        <button>Закрыть</button>
+        <div class="modal-meta">
+            <div class="modal-created">Дата создания: ${data.dataset.created}</div>
+            <div class="modal-updated">Дата обновления: ${data.dataset.updated}</div>
+            <div class="modal-number">Номер issues: ${data.dataset.number}</div>
+        </div>
+        
+    `;
+    modalPage.append(element);
+    modalPage.style.display = 'block'
+    const button = document.querySelector('.modal-page button');
+    button.addEventListener('click',()=>{
+        modalPage.innerHTML = ''
+    })
 }
 
 form.addEventListener('submit', (e)=>{
@@ -57,6 +107,8 @@ form.addEventListener('submit', (e)=>{
     const inputUser = document.querySelector('input#user').value,
         inputRepos = document.querySelector('input#repos').value;
     resultDiv.innerHTML = '';
+    usersDiv.innerHTML = '';
+    reposDiv.innerHTML = '';
     statusDiv.innerHTML = 'Загрузка...';
     getIssues(inputUser, inputRepos);
     console.log(inputRepos, inputUser)

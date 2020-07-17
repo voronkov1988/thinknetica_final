@@ -1,9 +1,9 @@
-import './style.css'
+import "./style.css";
 
-const statusDiv = document.querySelector('.status-div');
-const resultDiv = document.querySelector('.result-div');
-const modalPage = document.querySelector('.modal-page');
-const form = document.querySelector('form.issues-form');
+const statusDiv = document.querySelector(".status-div");
+const resultDiv = document.querySelector(".result-div");
+const modalPage = document.querySelector(".modal-page");
+const form = document.querySelector("form.issues-form");
 
 function getIssues(user, repository){
     fetch(`https://api.github.com/repos/${user}/${repository}/issues`)
@@ -14,25 +14,25 @@ function getIssues(user, repository){
             return Promise.resolve(result);
         })
         .then(res =>{
-            statusDiv.innerHTML = 'Готово...';
+            statusDiv.innerHTML = "Готово...";
             setTimeout(()=>{
-                statusDiv.innerHTML = '';
+                statusDiv.innerHTML = "";
             }, 3000);
 
             return res.json();
         })
         .then(response =>{
-            renderIssues(response)
+            renderIssues(response);
         })
         .catch(function(error) {
             statusDiv.innerHTML = `Ошибка ${error}`;
-            console.log('Request failed', error)
+            console.log("Request failed", error);
         });
 }
 
 function renderIssues(issues){
     issues.forEach(item =>{
-        let element = document.createElement('div');
+        let element = document.createElement("div");
         element.innerHTML = `
         <div class="result-div">
             <div data-closed="${item.closed_at}" class="issues">
@@ -59,24 +59,24 @@ function renderIssues(issues){
             </div>
         </div>
     `;
-        resultDiv.append(element)
+        resultDiv.append(element);
     });
-    takeModal()
+    takeModal();
 }
 
 function takeModal(){
-    let imgDiv = document.querySelectorAll('.profile img');
+    let imgDiv = document.querySelectorAll(".profile img");
     imgDiv.forEach(item=>{
-        item.addEventListener('click', (e)=>{
-            renderModal(e.target)
-        })
-    })
+        item.addEventListener("click", (e)=>{
+            renderModal(e.target);
+        });
+    });
 }
 
 function renderModal(data){
-    modalPage.innerHTML = '';
-    let element = document.createElement('div');
-    element.classList = 'wrapper';
+    modalPage.innerHTML = "";
+    let element = document.createElement("div");
+    element.classList = "wrapper";
     element.innerHTML = `
         <div class="modal-info">
             <div class="modal-contacts">
@@ -97,30 +97,30 @@ function renderModal(data){
         
     `;
     modalPage.append(element);
-    modalPage.style.display = 'block';
-    const button = document.querySelector('.modal-page button');
-    button.addEventListener('click',()=>{
-        modalPage.innerHTML = ''
-    })
+    modalPage.style.display = "block";
+    const button = document.querySelector(".modal-page button");
+    button.addEventListener("click",()=>{
+        modalPage.innerHTML = "";
+    });
 }
 
-form.addEventListener('submit', (e)=>{
+form.addEventListener("submit", (e)=>{
     e.preventDefault();
-    const inputUser = document.querySelector('input#user').value,
-        inputRepos = document.querySelector('input#repos').value;
-    resultDiv.innerHTML = '';
-    usersDiv.innerHTML = '';
-    reposDiv.innerHTML = '';
-    statusDiv.innerHTML = 'Загрузка...';
+    const inputUser = document.querySelector("input#user").value,
+        inputRepos = document.querySelector("input#repos").value;
+    resultDiv.innerHTML = "";
+    usersDiv.innerHTML = "";
+    reposDiv.innerHTML = "";
+    statusDiv.innerHTML = "Загрузка...";
     getIssues(inputUser, inputRepos);
-    console.log(inputRepos, inputUser)
+    console.log(inputRepos, inputUser);
 });
-'use strict';
-const inputUser = document.querySelector('input#user');
-const inputRepos = document.querySelector('input#repos');
-const reposDiv = document.querySelector('.repos');
-const status = document.querySelector('.status-div');
-const usersDiv = document.querySelector('.users');
+
+const inputUser = document.querySelector("input#user");
+const inputRepos = document.querySelector("input#repos");
+const reposDiv = document.querySelector(".repos");
+const status = document.querySelector(".status-div");
+const usersDiv = document.querySelector(".users");
 
 async function getUsers(value){
     fetch(`https://api.github.com/search/users?q=${value}`)
@@ -134,7 +134,7 @@ async function getUsers(value){
             return res.json();
         })
         .then(result =>{
-            renderUsers(result.items)
+            renderUsers(result.items);
         })
         .catch(function(error) {
             status.innerHTML = `Ошибка ${error}`;
@@ -144,24 +144,24 @@ async function getUsers(value){
 function renderUsers(users=null){
     let arrayUsers = [];
     users.forEach(user=>{
-        let element = document.createElement('div');
-        element.classList = 'one-user';
+        let element = document.createElement("div");
+        element.classList = "one-user";
         element.innerHTML = user.login;
         usersDiv.append(element);
         arrayUsers.push(element);
     });
-    writeIntoInput(arrayUsers)
+    writeIntoInput(arrayUsers);
 }
 
 function writeIntoInput(el){
-    let user = '';
+    let user = "";
     el.forEach(item =>{
-        item.addEventListener('click', (e)=>{
+        item.addEventListener("click", (e)=>{
             inputUser.value = e.target.textContent;
-            usersDiv.innerHTML = '';
+            usersDiv.innerHTML = "";
             user = inputUser.value;
-            loadRepository(user)
-        })
+            loadRepository(user);
+        });
     });
 
 }
@@ -172,29 +172,29 @@ function loadRepository(user){
             return res.json();
         })
         .then(result =>{
-            renderRepository(result)
-        })
+            renderRepository(result);
+        });
 }
 
 function renderRepository(repos){
     let reposArray = [];
     repos.forEach(item=>{
-        let element = document.createElement('div');
-        element.classList = 'one-repos';
+        let element = document.createElement("div");
+        element.classList = "one-repos";
         element.innerHTML = item.name;
         reposDiv.append(element);
         reposArray.push(element);
     });
-    writeIntoRepos(reposArray)
+    writeIntoRepos(reposArray);
 }
 
 function writeIntoRepos(perosArray) {
     perosArray.forEach(oneRepos =>{
-        oneRepos.addEventListener('click', (e)=>{
+        oneRepos.addEventListener("click", (e)=>{
             inputRepos.value = e.target.textContent;
-            reposDiv.innerHTML = '';
+            reposDiv.innerHTML = "";
             getIssues(inputUser.value, inputRepos.value);
-        })
+        });
     });
 }
 
@@ -210,9 +210,9 @@ function debounce(f, ms) {
     };
 }
 
-inputUser.addEventListener('input', (e)=>{
-    usersDiv.innerHTML = '';
-    inputRepos.value = '';
+inputUser.addEventListener("input", (e)=>{
+    usersDiv.innerHTML = "";
+    inputRepos.value = "";
     setTimeout(()=> delayUser(e.target.value),1000);
 });
 const delayUser = debounce(getUsers, 1000);
